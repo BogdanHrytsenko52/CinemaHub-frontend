@@ -1,8 +1,8 @@
 :root {
   color-scheme: dark;
   font-family: Inter, "Segoe UI", sans-serif;
-  background: #10131d;
-  color: #f6f5fb;
+  background: #181818;
+  color: #f2f2f2;
 }
 
 * { box-sizing: border-box; }
@@ -11,74 +11,75 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background:
-    radial-gradient(circle at 90% 5%, #713e9c 0, transparent 28rem),
-    radial-gradient(circle at 5% 30%, #184c63 0, transparent 30rem),
-    #10131d;
+  background: #181818;
 }
 
 button { font: inherit; }
-.page { width: min(1120px, calc(100% - 2rem)); margin: 0 auto; padding: 5rem 0; }
-.hero { max-width: 48rem; margin-bottom: 3.5rem; }
-.eyebrow, .section-label {
-  margin: 0 0 0.65rem;
-  color: #f0c563;
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+.site-header {
+  min-height: 56px;
+  border-bottom: 1px solid #343434;
+  background: #202020;
 }
+.header-content,
+.page {
+  width: min(960px, calc(100% - 2rem));
+  margin: 0 auto;
+}
+.header-content { display: flex; align-items: center; min-height: 56px; }
+.brand { color: #f5c451; font-size: 1.15rem; font-weight: 700; text-decoration: none; }
+.page { padding: 28px 0; }
+.hero { margin-bottom: 24px; }
 h1, h2, h3, p { margin-top: 0; }
-h1 { margin-bottom: 0.7rem; font-size: clamp(2.5rem, 7vw, 5rem); line-height: 0.98; }
-h2 { margin-bottom: 0; font-size: clamp(1.7rem, 4vw, 2.5rem); }
-.subtitle { max-width: 38rem; margin-bottom: 0; color: #c5c8d4; font-size: 1.1rem; line-height: 1.6; }
+h1 { margin-bottom: 0.5rem; font-size: clamp(2rem, 5vw, 2.25rem); line-height: 1.15; }
+h2 { margin-bottom: 0; font-size: 1.5rem; }
+.subtitle { margin-bottom: 0; color: #b7b7b7; font-size: 1rem; line-height: 1.5; }
 .catalogue {
-  padding: clamp(1.3rem, 4vw, 2.5rem);
-  border: 1px solid #343a4f;
-  border-radius: 1.25rem;
-  background: rgb(20 24 37 / 82%);
-  box-shadow: 0 1.5rem 4rem rgb(0 0 0 / 22%);
-  backdrop-filter: blur(12px);
+  padding: 20px;
+  border: 1px solid #353535;
+  border-radius: 8px;
+  background: #202020;
 }
 .catalogue-heading {
   display: flex;
   align-items: end;
   justify-content: space-between;
   gap: 1rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 .refresh-button {
   min-height: 2.75rem;
   padding: 0.65rem 1rem;
-  border: 1px solid #f0c563;
-  border-radius: 0.6rem;
-  background: transparent;
-  color: #f9d782;
+  border: 1px solid #f5c451;
+  border-radius: 6px;
+  background: #f5c451;
+  color: #201c12;
   cursor: pointer;
   font-weight: 700;
 }
-.refresh-button:hover, .refresh-button:focus-visible { background: #f0c563; color: #18140d; }
-.status-message { min-height: 1.5rem; margin-bottom: 1.25rem; color: #c5c8d4; }
+.refresh-button:hover, .refresh-button:focus-visible { background: #ffd66e; border-color: #ffd66e; }
+.status-message { min-height: 1.5rem; margin-bottom: 1rem; color: #b7b7b7; }
 .status-message.error { color: #ffb4ab; }
-.status-message.empty { color: #f9d782; }
+.status-message.empty { color: #f5c451; }
 .movies-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
 .movie-card {
   display: flex;
-  min-height: 13.5rem;
   flex-direction: column;
-  padding: 1.3rem;
-  border: 1px solid #3d455e;
-  border-radius: 0.9rem;
-  background: #1a2030;
+  min-height: 170px;
+  padding: 16px;
+  border: 1px solid #383838;
+  border-radius: 8px;
+  background: #262626;
 }
-.genre { margin-bottom: 1.6rem; color: #8ed6ef; font-size: 0.85rem; font-weight: 700; }
-.title { margin-bottom: auto; font-size: 1.35rem; line-height: 1.2; }
-.movie-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin: 1.5rem 0 0; }
-.movie-meta div { padding-top: 0.65rem; border-top: 1px solid #3d455e; }
-dt { margin-bottom: 0.25rem; color: #9fa6ba; font-size: 0.74rem; text-transform: uppercase; }
+.genre { margin-bottom: 1rem; color: #f5c451; font-size: 0.85rem; font-weight: 700; }
+.title { margin-bottom: auto; font-size: 1.2rem; line-height: 1.25; }
+.movie-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin: 1rem 0 0; }
+.movie-meta div { padding-top: 0.55rem; border-top: 1px solid #3a3a3a; }
+dt { margin-bottom: 0.25rem; color: #aaa; font-size: 0.74rem; text-transform: uppercase; }
 dd { margin: 0; font-weight: 700; }
 
 @media (max-width: 540px) {
-  .page { padding: 2.5rem 0; }
+  .page { padding: 20px 0; }
+  .catalogue { padding: 16px; }
   .catalogue-heading { align-items: flex-start; flex-direction: column; }
+  .refresh-button { width: 100%; }
 }
