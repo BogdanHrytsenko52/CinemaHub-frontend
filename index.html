@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="CinemaHub — список фільмів із Django REST API." />
+    <title>CinemaHub — афіша</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <section class="hero" aria-labelledby="page-title">
+        <p class="eyebrow">CinemaHub</p>
+        <h1 id="page-title">Афіша кінотеатру</h1>
+        <p class="subtitle">Фільми, які зараз доступні в системі кінотеатру.</p>
+      </section>
+      <section class="catalogue" aria-labelledby="movies-title">
+        <div class="catalogue-heading">
+          <div>
+            <p class="section-label">Програма</p>
+            <h2 id="movies-title">Список фільмів</h2>
+          </div>
+          <button id="refresh-button" class="refresh-button" type="button">Оновити</button>
+        </div>
+        <p id="status-message" class="status-message" aria-live="polite">Завантажуємо фільми…</p>
+        <div id="movies-list" class="movies-grid" aria-live="polite"></div>
+      </section>
+    </main>
+    <template id="movie-card-template">
+      <article class="movie-card">
+        <p class="genre"></p>
+        <h3 class="title"></h3>
+        <dl class="movie-meta">
+          <div><dt>Рейтинг</dt><dd class="rating"></dd></div>
+          <div><dt>Тривалість</dt><dd class="duration"></dd></div>
+        </dl>
+      </article>
+    </template>
+    <script src="app.js"></script>
+  </body>
+</html>
