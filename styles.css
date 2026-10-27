@@ -57,6 +57,36 @@ h2 { margin-bottom: 0; font-size: 1.5rem; }
   font-weight: 700;
 }
 .refresh-button:hover, .refresh-button:focus-visible { background: #ffd66e; border-color: #ffd66e; }
+.search-controls {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.search-controls input {
+  min-width: 0;
+  flex: 1;
+  min-height: 38px;
+  padding: 8px 10px;
+  border: 1px solid #484848;
+  border-radius: 6px;
+  background: #181818;
+  color: #f2f2f2;
+  font: inherit;
+}
+.search-controls input::placeholder { color: #989898; }
+.search-controls input:focus { border-color: #f5c451; outline: 2px solid rgb(245 196 81 / 22%); }
+.clear-search-button {
+  min-height: 38px;
+  padding: 8px 10px;
+  border: 1px solid #5a5a5a;
+  border-radius: 6px;
+  background: transparent;
+  color: #e0e0e0;
+  cursor: pointer;
+}
+.clear-search-button:disabled { cursor: default; opacity: 0.45; }
+.clear-search-button:not(:disabled):hover,
+.clear-search-button:not(:disabled):focus-visible { border-color: #f5c451; color: #f5c451; }
 .status-message { min-height: 1.5rem; margin-bottom: 1rem; color: #b7b7b7; }
 .status-message.error { color: #ffb4ab; }
 .status-message.empty { color: #f5c451; }
@@ -82,4 +112,6 @@ dd { margin: 0; font-weight: 700; }
   .catalogue { padding: 16px; }
   .catalogue-heading { align-items: flex-start; flex-direction: column; }
   .refresh-button { width: 100%; }
+  .search-controls { flex-wrap: wrap; }
+  .clear-search-button { flex: 1; }
 }

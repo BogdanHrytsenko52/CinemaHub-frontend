@@ -23,6 +23,18 @@
           <h2 id="movies-title">Фільми</h2>
           <button id="refresh-button" class="refresh-button" type="button">Оновити</button>
         </div>
+        <div class="search-controls">
+          <label class="visually-hidden" for="search-input">Пошук фільму</label>
+          <input
+            id="search-input"
+            type="search"
+            placeholder="Пошук фільму..."
+            autocomplete="off"
+          />
+          <button id="clear-search-button" class="clear-search-button" type="button" disabled>
+            Очистити
+          </button>
+        </div>
         <p id="status-message" class="status-message" aria-live="polite">Завантажуємо фільми…</p>
         <div id="movies-list" class="movies-grid" aria-live="polite"></div>
       </section>

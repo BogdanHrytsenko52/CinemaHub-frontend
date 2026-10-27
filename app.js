@@ -3,7 +3,11 @@ const API_BASE_URL = "http://localhost:8000";
 const list = document.querySelector("#movies-list");
 const statusMessage = document.querySelector("#status-message");
 const refreshButton = document.querySelector("#refresh-button");
+const searchInput = document.querySelector("#search-input");
+const clearSearchButton = document.querySelector("#clear-search-button");
 const cardTemplate = document.querySelector("#movie-card-template");
+let debounceTimer;
+let requestVersion = 0;
 
 function setStatus(message, type = "") {
   statusMessage.textContent = message;
@@ -28,13 +32,22 @@ function apiErrorMessage(payload) {
     "Не вдалося отримати дані з API.";
 }
 
+function updateClearButton() {
+  clearSearchButton.disabled = searchInput.value.trim() === "";
+}
+
 async function loadMovies() {
+  const requestId = ++requestVersion;
+  const searchQuery = searchInput.value.trim();
+  const queryString = searchQuery === ""
+    ? ""
+    : "?search=" + encodeURIComponent(searchQuery);
   refreshButton.disabled = true;
   list.replaceChildren();
   setStatus("Завантажуємо фільми…");
   try {
     const responses = await Promise.all([
-      fetch(API_BASE_URL + "/api/movies/", { headers: { Accept: "application/json" } }),
+      fetch(API_BASE_URL + "/api/movies/" + queryString, { headers: { Accept: "application/json" } }),
       fetch(API_BASE_URL + "/api/genres/", { headers: { Accept: "application/json" } }),
     ]);
     const moviesResponse = responses[0];
@@ -47,11 +60,19 @@ async function loadMovies() {
     const data = await Promise.all([moviesResponse.json(), genresResponse.json()]);
     const movies = data[0];
     const genres = data[1];
+    if (requestId !== requestVersion) {
+      return;
+    }
     const genresById = new Map(genres.map(function (genre) {
       return [genre.id, genre.name];
     }));
     if (movies.length === 0) {
-      setStatus("Поки що немає доданих фільмів.", "empty");
+      setStatus(
+        searchQuery === ""
+          ? "Поки що немає доданих фільмів."
+          : "За вашим запитом фільмів не знайдено.",
+        "empty"
+      );
       return;
     }
     renderMovies(movies, genresById);
@@ -59,9 +80,23 @@ async function loadMovies() {
   } catch (error) {
     setStatus("Помилка: " + error.message, "error");
   } finally {
-    refreshButton.disabled = false;
+    if (requestId === requestVersion) {
+      refreshButton.disabled = false;
+    }
   }
 }
 
 refreshButton.addEventListener("click", loadMovies);
+searchInput.addEventListener("input", function () {
+  updateClearButton();
+  window.clearTimeout(debounceTimer);
+  debounceTimer = window.setTimeout(loadMovies, 300);
+});
+clearSearchButton.addEventListener("click", function () {
+  searchInput.value = "";
+  updateClearButton();
+  window.clearTimeout(debounceTimer);
+  loadMovies();
+});
+updateClearButton();
 loadMovies();
